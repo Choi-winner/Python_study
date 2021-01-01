@@ -178,6 +178,9 @@ print(train.pop())
 train.append('유재석')
 print(train.count('유재석')) # 2가 나옴.
 
+# range로 list 선언하기.
+
+
 # 정리하기. 
 num_list = [2, 4, 5, 1, 3]
 num_list.sort()

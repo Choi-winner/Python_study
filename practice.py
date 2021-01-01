@@ -201,4 +201,38 @@ print(num_list)
 
 
 
+# 사전 <- 사전은 순서가 없고, 키와 값으로 이루어진 것.
+# 사전 자료형은 key와 value로 이루어 진다. 키와 값을 합쳐서 item이라고 부른다.
 
+# key에 대한 중복은 절대 허용되지 않는다. value는 중복이 가능하다.
+cabinet = {3:'유재석', 100:'정형돈', 23:'하하'}
+print(cabinet[3]) # 유재석 출력
+print(cabinet.get(3)) # 동일하게 유재석 출력
+
+# 그냥 대괄호를 이용했을 경우에는 없는 key를 찾으면 오류가 난다.
+# get을 이용했을 때에는 없는 key를 찾으면 None 이 출력된다. 오류가 안난다.
+print(cabinet.get(5)) # 5에 아무것도 없으므로 None이 출력.
+print(cabinet.get(5, '승현이')) # 5에 아무것도 없으면 '승현이'를 입력하고 그를 가지고 온다. 
+
+# 특정한 key가 사전에 있는 지 없는 지를 확인하는 방법. 'in'을 활용.
+print(3 in cabinet) # 이면 있으면 True, 없으면 False가 출력.
+
+# 새로운 값을 사전에 입력하고 싶을 때.
+# 이건 순서가 없으니깐 append가 필요없고, 그냥 변수 선언하듯 입력하면 된다.
+cabinet[24] = 'kim'
+print(cabinet[24])
+print(cabinet)
+
+# 없애고 싶으면 del 을 이용한다.
+del cabinet[24] # key 24에 있는 아이템이 삭제된다.
+print(cabinet)
+
+# key들만 출력
+print(cabinet.keys())
+# value들만 출력
+print(cabinet.values())
+# key, value 쌍으로 출력
+print(cabinet.items())  # (3, '유재석') 와 같이 출력된다.
+
+# 사전을 없애는 것.
+cabinet.clear()

@@ -123,16 +123,17 @@ print('{0:.2f}'.format(5/3))
 # 파일 입출력.
 
 # 파일 생성 및 쓰기.
-# score_file = open('score.txt', 'w', encoding='utf8') # 입력: 파일명, 여는목적, 인코딩방식(한글을 읽을려면 utf8)
-# print('수학 : 100', file = score_file)
-# print('영어 : 70', file = score_file)
-# score_file.close()
+score_file = open('score.txt', 'w', encoding='utf8') # 입력: 파일명, 여는목적, 인코딩방식(한글을 읽을려면 utf8)
+print('수학 : 100', file = score_file)
+print('영어 : 70', file = score_file)
+score_file.close()
 
 # 파일 뒤에 이어쓰기(append). a 사용!
 # score_file = open('score.txt', 'a', encoding='utf8') # a로 쓰면, 덮어쓰기 용도로 여는 것. append
 # score_file.write('\n국어: 20')
 # score_file.write('\n코딩: 100')
 # score_file.close()
+# print를 쓰지 않고 바로 write함수를 통하면 줄바꿈이 따로 없어서 줄바꿈을 해줘야한다.
 
 # 파일 읽어오기
 # score_file = open('score.txt', 'r', encoding = 'utf8')
@@ -148,6 +149,59 @@ print(score_file.readline())
 score_file.close()
 
 # readline 은 줄별로 읽고, 한 줄 읽으면 커서는 다음 줄로 이동하는 것.
+score_file = open('score.txt', 'r', encoding = 'utf8')
+# 몇 줄인지 모를때!
+while True:
+    line = score_file.readline()
+    if not line:
+        break
+    print(line, end= '')
+score_file.close()
+# 정수 0, 실수 0.0 이외의 모든 숫자는 True이다.(C언어처럼)
+# 빈 문자열을 제외한 모든 문자열은 True이다. 
+# 따라서 위의 not line 은 문자열이 없는 경우를 뜻한다. 
+
+# 여러줄의 입력을 list로 저장해서 사용하는 방법.
+score_file = open('score.txt', 'r', encoding = 'utf8')
+lines = score_file.readlines()
+for line in lines:
+    print(line, end = '')
+score_file.close()
+# 위와 같이 readlines를 쓰면 string의 list를 생성해서 lines에 입력.
+# 그리고 그 list를 for문 통해 하나씩 커내어 사용.
+# 한편, list에 저장되는 str 는 개행을 기준으로 하나씩 구분. 
 
 
+# Pickle
+# 사용하고 있는 데이터를 파일 형태로 저장해주는 것.
+# string만 저장하는 것이 아니라, list나 class와 같이 텍스트가 아닌 자료형을
+# 외부 파일에 읽고 쓸 수 있는 기능을 제공하는 모듈이 피클이다.
+# import pickle 을 통해 모듈을 입력한다.
+# open('name.pickle', 'wb') <- pickle형식 파일에 저장하고, write byte! 바이트 단위 입력.
+# pickle.dump(입력할 객체, 저장할 피킁) 
 
+# import pickle
+# BW_file = open('profile.pickle', 'wb')  # open 하면 bufferedWriter형이 출력됨.
+# profile = {'이름':'박명서', '나이':30, '취미':['축구', '골프', '등산']}
+# pickle.dump(profile, BW_file) # dump로 입력해야 자료형에 구애받지 않고 입력할 수 있다.
+# BW_file.close()
+
+# BR_file = open('profile.pickle', 'rb') # rb!
+# profile_in = pickle.load(BR_file) # pickle.load를 통해서 입력받는다.
+# print(profile_in)
+# BR_file.close()
+
+# import pickle 
+
+# with open('profile.pickle', 'rb') as profile_file:
+#     print(pickle.load(profile_file))
+# with 를 쓰면 with문 시작에서 open(파일명, 형식) as 저장할 장소   를 정의하며 시작하고.
+# open한 파일을 with문 안에서만 열어서 load등을 할 수 있다.
+# with문이 종료되면 자동으로 file 이 close 된다.
+
+
+# with로 pickle이 아닌 일반적인 텍스트 파일을 읽어올 수도 있다.
+# with open('name.txt', 'w', encoding='utf8') as name:
+#     name.write('choi')
+# with open('name.txt', 'r', encoding = 'utf8') as name:
+#     print(name.read())  
